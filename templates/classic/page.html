@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load helper %}
+
+{% block title %}{{ page.title }} - {% endblock %}
+
+{% block content %}
+<div>
+<article>
+  {% if page.title %}
+  <header>
+    <h1 class="entry-title">{{ page.title }}</h1>
+    {% if page.created_at %}<p class="meta"><time datetime="{{ page.created_at|date:"Y-m-d H:i:s O" }}" pubdate>{{ page.created_at }}</time></p>{% endif %}
+  </header>
+  {% endif %}
+  {% block main %}{{ page.content|safe }}{% endblock %}
+  {% if footer %}
+    <footer>
+	  <p class="meta">
+        {% if page.author %}<span class="byline author vcard">Posted by <span class="fn">{{ page.author }}</span></span>{% endif %}
+		<time datetime="{{ page.created_at|date:"Y-m-d H:i:s O" }}" pubdate>{{ page.created_at }}</time>
+        {% if tags %}<span class="categories"></span>{% for i in tags %}<a class="category" href="{{ i.get_absolute_url }}">{{ i.name }}</a> {% endfor %}{% endif %}
+      </p>
+      {% if sharing %}
+        <div class="sharing">
+			Share to 
+			<a href="http://twitter.com/share" class="twitter-share-button">Tweeter</a>
+			<a href="#" onclick="location.href='http://v.t.sina.com.cn/share/share.php?title='+encodeURIComponent(document.title)+'&url='+encodeURIComponent(location.href);return false;">Weibo</a>
+			<a href="#" onclick="location.href='http://www.delicious.com/share?url='+encodeURIComponent(location.href)+'&title='+encodeURIComponent(document.title);return false;">Delicious</a>
+		</div>
+      {% endif %}
+    </footer>
+  {% endif %}
+</article>
+{% if comments %}
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread">
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+        var disqus_shortname = '{{ DISQUS_SHORTNAME }}';
+        //var disqus_developer = 1;
+        (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+{% endif %}
+</div>
+{% endblock %}
+
+{% block sidebar %}
+  {% get_recent_posts 5 %}
+  {% get_top_tags 20 %}
+{% endblock %}

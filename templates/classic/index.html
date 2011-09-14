@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load helper %}
+
+{% block title %}{{ title|default:"Home"}} - {% endblock %}
+
+{% block content %}
+<div class="blog-index">
+{% for post in posts.object_list %}
+  <article>
+    <header>
+        <h1 class="entry-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h1>
+        <p class="meta">
+      	<time datetime="{{ post.created_at|date:"Y-m-d H:i:s O" }}" pubdate>{{ post.created_at }}</time>
+        </p>
+    </header>
+    <div class="entry-content">{{ post.content|safe }}</div>
+    <footer>
+      <a rel="full-article" href="{{ post.get_absolute_url }}">Read On</a>
+    </footer>
+  </article>
+{% endfor %}
+<nav role="pagination">
+  <div>
+    {% if posts.has_next %}
+      <a class="prev" href="?page={{ posts.next_page_number }}">&larr; Older</a>
+    {% endif %}
+    <a href="/archives">Blog Archives</a>
+    {% if posts.has_previous %}
+    <a class="next" href="?page={{ posts.previous_page_number }}">Newer &rarr;</a>
+    {% endif %}
+  </div>
+</nav>
+</div>
+{% endblock %}
+
+{% block sidebar %}
+  {% get_recent_posts 5 %}
+  {% get_top_tags 20 %}
+  {% get_links 20 %}
+{% endblock %}

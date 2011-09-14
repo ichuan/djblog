@@ -1,0 +1,25 @@
+{% extends "page.html" %}
+{% load helper %}
+
+{% block title %}Archives - {% endblock %}
+
+{% block main %}
+<div id="blog-archives">
+{% for post in posts %}
+  {% captureas this_year %}{{ post.created_at|date:"Y" }}{% endcaptureas %}
+  {% if this_year != last_year %}
+    <h2>{{ this_year }}</h2>
+    {% assign last_year this_year %}
+  {% endif %}
+  <article>
+    <h1><a href="{{ post.get_absolute_url }}">{{post.title}}</a></h1>
+    <time datetime="{{ post.created_at|date:"Y-m-d H:i:s O" }}" pubdate><span class="month">{{ post.created_at|date:"n" }}</span> 月 <span class="day">{{ post.created_at|date:"j" }}</span></time>
+  </article>
+{% endfor %}
+</div>
+{% endblock %}
+
+{% block sidebar %}
+  {% get_recent_posts 5 %}
+  {% get_top_tags 20 %}
+{% endblock %}

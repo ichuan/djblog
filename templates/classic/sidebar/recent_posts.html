@@ -1,0 +1,10 @@
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    {% for post in recent_posts %}
+      <li class="post">
+        <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+</section>
