@@ -26,7 +26,7 @@
 2. 拷贝 `local_settings.default.py` 为 `local_settings.py`，修改里面的数据库配置。还有其他配置可以改
 3. 执行 `python manage.py syncdb` 同步数据库
 4. 执行 `python manage.py runserver 0.0.0.0:8000` 启动临时服务器
-5. 浏览器访问 `http://localhost:8000`，后台地址是 `http://localhost:8000/xxoo/`，口令在第 `3` 步时创建
+5. 浏览器访问 `http://localhost:8000`，后台地址是 `http://localhost:8000/admin/`，口令在第 `3` 步时创建
 
 
 自定义主题
