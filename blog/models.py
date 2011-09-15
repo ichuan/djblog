@@ -93,7 +93,7 @@ class Post(models.Model):
 		return self.title
 
 	def get_absolute_url(self):
-		return u'/post/%d/%s/' % (self.id, self.slug or self.title)
+		return u'/post/%d/%s/' % (self.id, self.slug or self.title.replace('/', '-'))
 
 	class Meta:
 		get_latest_by = 'created_at'
