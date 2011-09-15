@@ -4,8 +4,8 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>{% block title %}{% endblock %}{{ SITE_TITLE }}</title>
-  <meta name="author" content="{{ SITE_AUTHOR }}" />
+  <title>{% block title %}{% endblock %}{{ settings.SITE_TITLE }}</title>
+  <meta name="author" content="{{ settings.SITE_AUTHOR }}" />
   {% if page.description %}
    <meta name="description" content="{{ page.description }}" />
   {% endif %}
@@ -17,14 +17,14 @@
    <meta name="keywords" content="{{ keywords }}" />
   {% endif %}
   <link rel="canonical" href="{{ page.get_absolute_url }}" />
-  <link href="/feed/" rel="alternate" title="{{ SITE_TITLE }}" type="application/atom+xml" />
-  <link href="http://s2.wp.com/i/favicon.ico" rel="shortcut icon" />
-  <link href="{{ MEDIA_URL }}css/screen.css?1" media="screen, projection" rel="stylesheet" type="text/css" />
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-  <script src="{{ MEDIA_URL }}js/main.js"></script>
-  <link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
-  <link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
-  {% if GA_ID %}
+  <link href="/feed/" rel="alternate" title="{{ settings.SITE_TITLE }}" type="application/atom+xml" />
+  <link href="/favicon.ico" rel="shortcut icon" />
+  <link href="{{ settings.MEDIA_URL }}css/screen.css?1" media="screen, projection" rel="stylesheet" type="text/css" />
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+  <script src="{{ settings.MEDIA_URL }}js/main.js"></script>
+  <link href='//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+  <link href='//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+  {% if settings.GA_ID %}
     <script type="text/javascript">
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', '{{ GA_ID }}']);
@@ -40,9 +40,9 @@
 <body{% if no_sidebar %} class="no-sidebar"{% endif %}>
   <header>
 	<hgroup>
-	  <h1><a href="/">{{ SITE_TITLE }}</a></h1>
-	  {% if SITE_SUBTITLE %}
-		<h2>{{ SITE_SUBTITLE }}</h2>
+	  <h1><a href="/">{{ settings.SITE_TITLE }}</a></h1>
+	  {% if settings.SITE_SUBTITLE %}
+		<h2>{{ settings.SITE_SUBTITLE }}</h2>
 	  {% endif %}
 	</hgroup>
   </header>
@@ -52,7 +52,7 @@
 	</ul>
 	<form action="http://www.google.com/cse" method="get">
 	  <fieldset role="site-search">
-		<input type="hidden" name="cx" value="{{ CSE_ID }}">
+		<input type="hidden" name="cx" value="{{ settings.CSE_ID }}">
 		<input class="search" type="search" name="q" placeholder="Search" />
 	  </fieldset>
 	</form>
@@ -76,7 +76,7 @@
   </div>
   <footer>
 	<p>
-	  Copyright &copy; 2011 - {{ SITE_AUTHOR }} -
+	  Copyright &copy; 2011 - {{ settings.SITE_AUTHOR }} -
 	  <span class="credit">Powered by <a href="https://github.com/ichuan/djblog">djblog</a></span> -
 	  <span class="credit">Theme by <a href="http://www.octopress.org/">Octopress</a></span>
 	</p>
