@@ -9,5 +9,4 @@ def globals_vars(request):
 	return {
 		'request': request,
 		'settings': settings,
-		'MEDIA_URL': settings.MEDIA_URL,
 	}

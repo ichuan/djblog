@@ -11,7 +11,8 @@
   7. 友情链接
   8. Google Analytics 集成
   9. 主题
-  10. Google 自定义搜索
+  10. RSS
+  11. Google 自定义搜索
 
 依赖
 ----
