@@ -1,0 +1,5 @@
+*.py[co]
+*.mo
+*.swp
+local_settings.py
+bin/crontab.sh
