@@ -20,7 +20,7 @@ class PageAdminForm(forms.ModelForm):
 
 	def clean_slug(self):
 		slug = self.cleaned_data['slug']
-		if re.match(r'^[a-zA-Z_\-]+$', slug):
+		if re.match(r'^[a-z0-9A-Z_\-]+$', slug):
 			return slug.strip()
 
 		raise forms.ValidationError(u'slug 格式不正确')
@@ -42,7 +42,7 @@ class PostAdminForm(forms.ModelForm):
 
 	def clean_slug(self):
 		slug = self.cleaned_data['slug']
-		if not slug or re.match(r'^[a-zA-Z_\-]+$', slug):
+		if not slug or re.match(r'^[a-z0-9A-Z_\-]+$', slug):
 			return slug.strip()
 
 		raise forms.ValidationError(u'slug 格式不正确')

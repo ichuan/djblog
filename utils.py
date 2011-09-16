@@ -19,4 +19,4 @@ def get_page(objs, page):
 
 def is_slug(slug):
 	'''slug check'''
-	return re.match(r'^[a-zA-Z_\-]+$', slug)
+	return re.match(r'^[a-z0-9A-Z_\-]+$', slug)
