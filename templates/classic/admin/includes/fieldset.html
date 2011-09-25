@@ -49,6 +49,15 @@
 										return false;
 									}});
 									editor.run();
+									// hold
+									window.onbeforeunload = function(e){
+										e = e || window.event;
+										if (e){
+											e.returnValue = '放弃此次编辑？';
+										}
+										return '放弃此次编辑？';
+									}
+									django.jQuery('#post_form').submit(function(){ window.onbeforeunload = null; });
 								})();
 								</script>
 							{% else %}
