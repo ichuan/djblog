@@ -28,6 +28,7 @@
 3. 执行 `python manage.py syncdb` 同步数据库
 4. 执行 `python manage.py runserver 0.0.0.0:8000` 启动临时服务器
 5. 浏览器访问 `http://localhost:8000`，后台地址是 `http://localhost:8000/admin/`，口令在第 `3` 步时创建
+6. 在后台的`sites`里更改默认的`example.com`为你自己的域名（`RSS`输出中的链接会使用到）
 
 
 自定义主题
