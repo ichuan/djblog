@@ -43,7 +43,7 @@ PER_PAGE = 5
 RECENT_COUNT = 5
 
 # google 统计的 id
-GA_ID = 'UA-25471596-1'
+GA_ID = 'UA-15372596-1'
 
 # google custom search id, see http://www.google.com/cse/
 CSE_ID = '017823656936221718810:8oexw_fkbz0'
