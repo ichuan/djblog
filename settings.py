@@ -54,6 +54,8 @@ MEDIA_ROOT = os.path.join(ROOT_DIR, 'static')
 # trailing slash.
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
 MEDIA_URL = '/static/'
+# fix for django 1.4
+STATIC_URL = '/static/'
 
 # URL prefix for admin static files -- CSS, JavaScript and images.
 # Make sure to use a trailing slash.
