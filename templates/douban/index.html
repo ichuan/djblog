@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load helper %}
+{% block title %}Archives - {% endblock %}
+
+{% block content %}
+<h1 class="title">所有日记<span class="about">共有<span class="big">1</span>篇日记 </h1>
+
+{% for post in posts.object_list %}
+    <div id="note">         
+        <h3 class="title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>     
+      <div class="date">{{ post.created_at|date:"Y-m-d H:i:s" }}</div>
+      <div class="content">{{ post.content|cut:"70" }}
+      <!-- <span class="action"><a href="#">9回应</a> <a href="/index.php?s=/Note/view/id/30">浏览全文</a></span> -->
+      </div><!-- end content -->      
+    </div><!-- end note -->       
+{% endfor %}
+
+<nav role="pagination">
+<div class="page_nav center">
+    {% if posts.has_next %}
+      <a class="prev" href="?page={{ posts.next_page_number }}">&larr; 上一页</a>
+    {% endif %}
+    共{{ posts.paginator.count }}条记录 第{{ posts.number }}/{{ posts.paginator.num_pages }}页
+    {% if posts.has_previous %}
+    <a class="next" href="?page={{ posts.previous_page_number }}">下一页&rarr;</a>
+    {% endif %}
+  </div>
+</nav>
+
+
+
+{% endblock %}
+
+{% block sidebar %}
+  {% get_recent_posts 5 %}
+  {% get_top_tags 20 %}
+{% endblock %}

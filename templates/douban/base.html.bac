@@ -19,9 +19,9 @@
   <link rel="canonical" href="{{ page.get_absolute_url }}" />
   <link href="/feed/" rel="alternate" title="{{ settings.SITE_TITLE }}" type="application/atom+xml" />
   <link href="/favicon.ico" rel="shortcut icon" />
-  <link href="{{ settings.MEDIA_URL }}classic/css/screen.css?2" media="screen, projection" rel="stylesheet" type="text/css" />
+  <link href="{{ settings.MEDIA_URL }}css/screen.css?2" media="screen, projection" rel="stylesheet" type="text/css" />
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-  <script src="{{ settings.MEDIA_URL }}classic/js/main.js"></script>
+  <script src="{{ settings.MEDIA_URL }}js/main.js"></script>
   <link href='//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
   <link href='//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
   {% if settings.GA_ID %}

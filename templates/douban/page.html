@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load helper %}
+{% block title %}{{ page.title }} - {% endblock %}
+{% block content %}
+<h1 class="title">{{ page.title }}<span class="about"></span> </h1>
+<div id="note">         
+  <div class="date"><time datetime="{{ page.created_at|date:"Y-m-d H:i:s" }}" pubdate>{{ page.created_at }}</time>
+
+{% if tags %}<span class="categories"></span>{% for i in tags %}<a class="category" href="{{ i.get_absolute_url }}">{{ i.name }}</a> {% endfor %}{% endif %}
+  </div>
+  <div class="content page-content">{{ page.content|safe }}</div><!-- end content -->      
+</div><!-- end note --> 
+
+
+
+{% if sharing %}
+        <div class="sharing">
+			Share to 
+			<a href="http://twitter.com/share" class="twitter-share-button">Tweeter</a>
+			<a href="#" onclick="location.href='http://v.t.sina.com.cn/share/share.php?title='+encodeURIComponent(document.title)+'&url='+encodeURIComponent(location.href);return false;">Weibo</a>
+			<a href="#" onclick="location.href='http://www.delicious.com/share?url='+encodeURIComponent(location.href)+'&title='+encodeURIComponent(document.title);return false;">Delicious</a>
+		</div>
+{% endif %}
+
+
+{% if comments %}
+  <section>
+    <h3>回应</h3>
+    <div id="disqus_thread">
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+        var disqus_shortname = '{{ settings.DISQUS_SHORTNAME }}';
+        //var disqus_developer = 1;
+        (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+  {% endif %}
+{% endblock %}
+
+{% block sidebar %}
+  {% get_recent_posts 5 %}
+  {% get_top_tags 20 %}
+{% endblock %}

@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+Design by Free CSS Templates
+http://www.freecsstemplates.org
+Released for free under a Creative Commons Attribution 2.5 License
+
+Title      : Reference
+Version    : 1.0
+Released   : 20081110
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<base href=""/>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="google-site-verification" content="s9ZqYqVffU8u01xbJK30H3fwha6eofs7Cu1ZUJ79gWM" />
+<title>{% block title %}{% endblock %}{{ settings.SITE_TITLE }}</title>
+<link href="/feed/" rel="alternate" title="{{ settings.SITE_TITLE }}" type="application/atom+xml" />
+{% if keywords %}<meta name="keywords" content="{{ keywords }}" /> {% endif %}
+{% if page.description %} <meta name="description" content="{{ page.description }}" /> {% endif %}
+<link href="/static/douban/css/style.css" rel="stylesheet" type="text/css" />
+<link href="/static/douban/css/thickbox.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/static/douban/js/jquery.js"></script>
+<script type="text/javascript" src="/static/douban/js/thickbox.js"></script>
+<script type="text/javascript" src="/static/douban/js/jquery.validate.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){  
+  nowtime();
+});
+
+function nowtime(){
+      var time = ['子时', '丑时', '寅时', '卯时', '辰时', '巳时', '午时', '未时', '申时', '酉时', '戌时', '亥时'];
+      var text = ['夜半销魂，谁人歌', '雄鸡未鸣，身未起', '风雨如晦，平旦出', '旭日东升，无往复', '君子勿劳，朝食饱', '鸡栖于莳，河清定', '善行无迹，恒德足', '日过中天，骄未散 ', '哺鹊进食，斜阳归', '鸡栖于埘，日沉坡', '日暮将至，归田园', '人定归本，早安眠'];
+      hour = new Date().getHours();
+      hourx = Math.ceil(hour/2);
+      if (hourx == 12) { hourx = 0; }  
+      var text="<strong>"+time[hourx]+"</strong>&nbsp;&nbsp;"+text[hourx];
+      $('span.nowtime').html(text);
+}
+
+//Refresh the verify
+function verify(){
+    var nowTime=new Date().getTime();
+    $('img.verify').attr('src','/index.php?s=/Verify/verify/'+nowTime);
+
+}
+
+function jump(count) {   
+  window.setTimeout(function(){   
+    count--;   
+    if(count > 0) {   
+      $('#num').attr('innerHTML', count);   
+      jump(count);   
+    } else {   
+      location.reload();   
+    }   
+  }, 1000);   
+}
+
+
+//隐藏和显示评论
+function hideResponse(id){
+  $('#no'+id+' #action a.link2').hide();
+  $('#no'+id+' #action a.link1').show();
+  $('#no'+id+' ul.response').slideUp('slow');     //评论列表  
+}
+
+function showResponse(id){
+  //alert(id);
+  $('#no'+id+' #action a.link1').hide();
+  $('#no'+id+' #action a.link2').show();
+  $('#no'+id+' ul.response').slideDown('slow');   //评论列表
+}
+
+function addResponse(id){
+  var text=$('#no'+id+' .inbox').val();
+  //alert(text);
+  if (text=='')
+    return false;
+  $('#no'+id+' span.loading').show();
+  $('#no'+id+' input.write_on').hide();
+  alert('本条微薄的ID为：'+id);
+  
+  $.ajax({
+    type:"GET",
+    data:{text:text,w_id:id},
+    url:"/weibo/" + id + "/response/add/",
+    success:function(msg){   
+        $('#'+id+' span.loading').hide();
+        $('#'+id+' input.write_on').show();
+        alert('服务器端返回的数据为：'+msg);   
+        //清空输入框
+        $('#'+id+' .inbox').val('');
+        //载入用户输入的回复内容
+        $('#no'+id +' .response li.add_response').html(msg);
+        $('#no'+id +' .response li.add_response').removeClass("add_response");
+     
+    }
+  });
+}
+
+</script>
+</head>
+
+<body>
+<div id="topnav">
+  <div class="left">
+  <span class="nowtime"></span>
+  </div>
+  <div class="right">
+    <a href="/index.php?s=/Rss/" target="_blank" title="使用RSS2.0订阅本站">订阅</a>
+        <a href="http://www.douban.com/people/T-y/" target="_blank" title="去围观TY的豆瓣">豆瓣</a>
+    <a href="/index.php?s=/Sina/clearn" title="新浪微博批量好友清理工具">工具</a>
+  
+        <a href="/index.php?s=/Sina/aurl" title="使用你的新浪微博账号登陆留言">登陆</a>
+      </div>
+</div><!-- end topnav-->
+<div id="header" class="blue">
+  <div class="logo">
+    <a href="/index.php?s="><img src="/static/douban/images/logo.png" title="TY的微博 " />
+    </a>
+  </div>  
+  <div id="menu">
+    <ul>
+      <li><a href="/" hidefocus>首页</a></li>
+      <li><a href="/archives/" hidefocus>文章</a></li>        
+	  {% load helper %}
+	  {% getnavas navs %}
+		{% for i in navs %}
+		  <li><a href="{{ i.get_absolute_url }}">{{ i.title }}</a></li>
+		{% endfor %}
+      <li>  
+      <span class="absolute" id="search">
+        <input type="text" class="search_inbox" size="32" maxlength="29" />
+        <input type="submit" class="button search" value=" "  hidefocus  /> 
+      </span> 
+      </li>
+    </ul> 
+  </div><!-- end menue-->
+</div><!-- end header -->
+<div id="wrapper">
+<div id="page">
+  <div id="content">
+    {% block content %}{% endblock %}
+  </div><!-- end content -->
+      
+  <div id="sidebar">{% block sidebar %}{% endblock %}</div><!-- end sidebar -->
+  <div style="clear: both;">&nbsp;</div>
+</div>
+</div><!-- end page -->
+<!-- start footer -->
+<script type="text/javascript">
+function totop(){
+  $( 'html, body' ).animate( { scrollTop: 0 }, 600 );
+}
+</script>
+<div class="footer" id="wrapper">
+  <div class="footerl">&copy; 2010-2011 T-Y.ME POWERED BY <a href="http://t-y.me/">TianYu</a></div>
+    <div class="footerr">
+  <a href="/index.php?s=/Worlds/view/id/201" title="如果你在浏览小站的时候发现了BUG，请告诉我。">BUG报告</a>
+  <a href="/index.php?s=/Index/wap">手机访问</a>
+  <a href="/index.php?s=/Index/copyRight">版权声明</a>
+  <a href="#"></a>
+  <a href="javascrtipt:void(0)" onclick="totop()">回到顶部</a>  
+  </div>
+</div>
+<!-- end footer -->
+</body>
+</html>

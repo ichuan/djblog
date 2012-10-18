@@ -1,0 +1,10 @@
+<section>
+  <h1>Links</h1>
+  <ul id="links">
+    {% for link in links %}
+      <li class="post">
+        <a target="_blank" href="{{ link.url }}">{{ link.name}}</a>
+      </li>
+    {% endfor %}
+  </ul>
+</section>

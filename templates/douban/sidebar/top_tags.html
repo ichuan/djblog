@@ -1,0 +1,8 @@
+<section>
+  <h1>Tags</h1>
+  <p id="top_tags">
+    {% for tag in top_tags %}
+      <a title="{{ tag.count_post }} Posts" href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> <span class="tag_meta">({{ tag.count_post }})</span>
+    {% endfor %}
+  </p>
+</section>
