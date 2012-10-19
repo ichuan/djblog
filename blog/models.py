@@ -1,6 +1,5 @@
 # coding: utf-8
 # author: yc@/2011/8/26
-
 import markdown
 from django.db import models
 from django.db.models import F
@@ -103,7 +102,7 @@ class Post(models.Model):
 class Link(models.Model):
 	'''链接'''
 	name = models.CharField(max_length=200, verbose_name=u'名称')
-	url = models.URLField(verify_exists=False, verbose_name=u'链接')
+	url = models.URLField(verify_exists=False,unique=True,verbose_name=u'链接')
 	seq = models.IntegerField(default=0, db_index=True, verbose_name=u'排序')
 
 	def __unicode__(self):
