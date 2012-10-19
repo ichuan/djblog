@@ -64,12 +64,14 @@ function nowtime(){
 	  {% load helper %}
 	  {% getnavas navs %}
 	  {% for i in navs %} <li><a href="{{ i.get_absolute_url }}">{{ i.title }}</a></li> {% endfor %}
+      <!--
       <li>  
       <span class="absolute" id="search">
         <input type="text" class="search_inbox" size="32" maxlength="29" />
         <input type="submit" class="button search" value=" "  hidefocus  /> 
       </span> 
       </li>
+      -->
     </ul> 
   </div><!-- end menue-->
 </div><!-- end header -->
