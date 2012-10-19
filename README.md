@@ -41,4 +41,7 @@
 
 主题放在 `templates/` 目录下，一个目录是一个主题，`classic` 为默认主题，可参考这个制作新主题。
 
-[1]: http://ichuan.net
+DEMO
+----
++ <http://ichuan.net>
++ <http://djblog.pythoner.net>
