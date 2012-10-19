@@ -37,66 +37,6 @@ function nowtime(){
       $('span.nowtime').html(text);
 }
 
-//Refresh the verify
-function verify(){
-    var nowTime=new Date().getTime();
-    $('img.verify').attr('src','/index.php?s=/Verify/verify/'+nowTime);
-
-}
-
-function jump(count) {   
-  window.setTimeout(function(){   
-    count--;   
-    if(count > 0) {   
-      $('#num').attr('innerHTML', count);   
-      jump(count);   
-    } else {   
-      location.reload();   
-    }   
-  }, 1000);   
-}
-
-
-//隐藏和显示评论
-function hideResponse(id){
-  $('#no'+id+' #action a.link2').hide();
-  $('#no'+id+' #action a.link1').show();
-  $('#no'+id+' ul.response').slideUp('slow');     //评论列表  
-}
-
-function showResponse(id){
-  //alert(id);
-  $('#no'+id+' #action a.link1').hide();
-  $('#no'+id+' #action a.link2').show();
-  $('#no'+id+' ul.response').slideDown('slow');   //评论列表
-}
-
-function addResponse(id){
-  var text=$('#no'+id+' .inbox').val();
-  //alert(text);
-  if (text=='')
-    return false;
-  $('#no'+id+' span.loading').show();
-  $('#no'+id+' input.write_on').hide();
-  alert('本条微薄的ID为：'+id);
-  
-  $.ajax({
-    type:"GET",
-    data:{text:text,w_id:id},
-    url:"/weibo/" + id + "/response/add/",
-    success:function(msg){   
-        $('#'+id+' span.loading').hide();
-        $('#'+id+' input.write_on').show();
-        alert('服务器端返回的数据为：'+msg);   
-        //清空输入框
-        $('#'+id+' .inbox').val('');
-        //载入用户输入的回复内容
-        $('#no'+id +' .response li.add_response').html(msg);
-        $('#no'+id +' .response li.add_response').removeClass("add_response");
-     
-    }
-  });
-}
 
 </script>
 </head>
@@ -107,12 +47,12 @@ function addResponse(id){
   <span class="nowtime"></span>
   </div>
   <div class="right">
+    <a href="#">欢迎您,{% if request.user %}{{ request.user }}{% else %}访客</a>{% endif %}
     <a href="/index.php?s=/Rss/" target="_blank" title="使用RSS2.0订阅本站">订阅</a>
-        <a href="http://www.douban.com/people/T-y/" target="_blank" title="去围观TY的豆瓣">豆瓣</a>
-    <a href="/index.php?s=/Sina/clearn" title="新浪微博批量好友清理工具">工具</a>
-  
-        <a href="/index.php?s=/Sina/aurl" title="使用你的新浪微博账号登陆留言">登陆</a>
-      </div>
+    <a href="http://www.douban.com/people/T-y/" target="_blank" title="去围观TY的豆瓣">豆瓣</a>
+    <a href="http://weibo.com/tyminiblog2010" target="_blank" title="去围观TY的新浪微博">新浪</a>
+    {% if request.user %}<a href="/admin/logout/">登出</a>{% endif %}
+  </div>
 </div><!-- end topnav-->
 <div id="header" class="blue">
   <div class="logo">
@@ -122,12 +62,10 @@ function addResponse(id){
   <div id="menu">
     <ul>
       <li><a href="/" hidefocus>首页</a></li>
-      <li><a href="/archives/" hidefocus>文章</a></li>        
+      <li><a href="/links/" hidefocus>友链</a></li>
 	  {% load helper %}
 	  {% getnavas navs %}
-		{% for i in navs %}
-		  <li><a href="{{ i.get_absolute_url }}">{{ i.title }}</a></li>
-		{% endfor %}
+	  {% for i in navs %} <li><a href="{{ i.get_absolute_url }}">{{ i.title }}</a></li> {% endfor %}
       <li>  
       <span class="absolute" id="search">
         <input type="text" class="search_inbox" size="32" maxlength="29" />
@@ -154,12 +92,11 @@ function totop(){
 }
 </script>
 <div class="footer" id="wrapper">
-  <div class="footerl">&copy; 2010-2011 T-Y.ME POWERED BY <a href="http://t-y.me/">TianYu</a></div>
+  <div class="footerl">&copy; 2010-2011 T-Y.ME POWERED BY <a href="http://t-y.me/">TY</a></div>
     <div class="footerr">
-  <a href="/index.php?s=/Worlds/view/id/201" title="如果你在浏览小站的时候发现了BUG，请告诉我。">BUG报告</a>
-  <a href="/index.php?s=/Index/wap">手机访问</a>
-  <a href="/index.php?s=/Index/copyRight">版权声明</a>
-  <a href="#"></a>
+  <a href="#" title="如果你在浏览小站的时候发现了BUG，请告诉我。">BUG报告</a>
+  <a href="#">手机访问</a>
+  <a href="#">版权声明</a>
   <a href="javascrtipt:void(0)" onclick="totop()">回到顶部</a>  
   </div>
 </div>

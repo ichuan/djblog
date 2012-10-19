@@ -3,13 +3,13 @@
 {% block title %}Archives - {% endblock %}
 
 {% block content %}
-<h1 class="title">所有日记<span class="about">共有<span class="big">1</span>篇日记 </h1>
+<h1 class="title">所有文章<span class="about">共有<span class="big">{{ posts.paginator.count }}</span>篇 </h1>
 
 {% for post in posts.object_list %}
     <div id="note">         
         <h3 class="title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>     
       <div class="date">{{ post.created_at|date:"Y-m-d H:i:s" }}</div>
-      <div class="content">{{ post.content|cut:"70" }}
+      <div class="content">{{ post.content|striptags|cut:"&nbsp;"|slice:"200" }}
       <!-- <span class="action"><a href="#">9回应</a> <a href="/index.php?s=/Note/view/id/30">浏览全文</a></span> -->
       </div><!-- end content -->      
     </div><!-- end note -->       
@@ -34,4 +34,5 @@
 {% block sidebar %}
   {% get_recent_posts 5 %}
   {% get_top_tags 20 %}
+  {% get_links 20 %}
 {% endblock %}

@@ -321,7 +321,7 @@ legend {
 	text-indent:24px;
 }
 
-div.page-content h1{font-size:16px;}
+#blog-content h1,#blog-content h2,#blog-content h3,#blog-content h4,#blog-content h5{font-size:16px;border:none;color:#000;font-weight:800;padding:0;margin:0;}
 
 #content blockquote{
 	background:#f4f4f4;
@@ -622,7 +622,7 @@ b{
   height:230px;
   margin:0 0 100px 0;}
   
-#sidebar h2 {
+#sidebar h2,#sidebar h1 {
 	margin-bottom: 10px;
 	padding:30px 0 0 0;
 	border-bottom: 1px #999999 dashed;

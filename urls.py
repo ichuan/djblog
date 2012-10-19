@@ -14,6 +14,7 @@ urlpatterns = patterns('',
 	(r'^archives/$', 'views.archives'),
     (r'^admin/', include(admin.site.urls)),
 	(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT,}), # TODO 用nginx配置代替
+    (r'links/$','views.links'),
 )
 
 # blogs
@@ -21,4 +22,8 @@ urlpatterns += patterns('blog.views',
 	(r'^post/(?P<pid>\d+)/', 'show_post'),
 	(r'^tag/(?P<name>.+)/$', 'list_by_tag'),
     (r'^feed/$', LatestPostFeed()),
+)
+
+urlpatterns += patterns('',
+    (r'^(\S{1,50})/$','views.slug'),
 )
