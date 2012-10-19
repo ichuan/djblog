@@ -8,7 +8,7 @@
 {% for post in posts.object_list %}
     <div id="note">         
         <h3 class="title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>     
-      <div class="date">{{ post.created_at|date:"Y-m-d H:i:s" }}</div>
+        <div class="date">{{ post.created_at|date:"Y-m-d H:i:s" }} |  {{ post.count_hit }}阅</div>
       <div class="content">{{ post.content|striptags|cut:"&nbsp;"|slice:"200" }}
       <!-- <span class="action"><a href="#">9回应</a> <a href="/index.php?s=/Note/view/id/30">浏览全文</a></span> -->
       </div><!-- end content -->      

@@ -74,7 +74,6 @@ class PostManager(models.Manager):
 		if quick:
 			return [Post(**i) for i in Post.objects.values('id', 'title', 'slug')[:num]]
 		return Post.objects.all()[:num]
-		
 
 class Post(models.Model):
 	'''文章'''
