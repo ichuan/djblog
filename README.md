@@ -43,5 +43,5 @@
 
 DEMO
 ----
-+ <http://ichuan.net>
-+ <http://djblog.pythoner.net>
++ 主题1 <http://ichuan.net>
++ 主题2 <http://djblog.pythoner.net>
