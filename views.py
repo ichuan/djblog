@@ -13,7 +13,7 @@ from blog.models import Post, Page,Link
 
 def slug(request,name):
     try:
-		page = Page.objects.values('title','slug', 'content', 'created_at', 'allow_comment').get(slug=name)
+		page = Page.objects.values('id','title','slug', 'content', 'created_at', 'allow_comment').get(slug=name)
     except Page.DoesNotExist:
         raise  Http404
     else:
