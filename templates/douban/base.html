@@ -1,19 +1,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<!--
-Design by Free CSS Templates
-http://www.freecsstemplates.org
-Released for free under a Creative Commons Attribution 2.5 License
-
-Title      : Reference
-Version    : 1.0
-Released   : 20081110
--->
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <base href=""/>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <meta name="google-site-verification" content="s9ZqYqVffU8u01xbJK30H3fwha6eofs7Cu1ZUJ79gWM" />
-<title>{% block title %}{% endblock %}{{ settings.SITE_TITLE }}</title>
+<title>{% block title %}{% endblock %} - {{ settings.SITE_TITLE }}</title>
 <link href="/feed/" rel="alternate" title="{{ settings.SITE_TITLE }}" type="application/atom+xml" />
 {% if keywords %}<meta name="keywords" content="{{ keywords }}" /> {% endif %}
 {% if page.description %} <meta name="description" content="{{ page.description }}" /> {% endif %}
