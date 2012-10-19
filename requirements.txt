@@ -1,0 +1,2 @@
+markdown
+django >= 1.3

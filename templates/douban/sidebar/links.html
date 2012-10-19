@@ -1,0 +1,8 @@
+<section>
+  <h1>链接</h1>
+  <ul id="links">
+    {% for link in links %}
+      <li> <a target="_blank" href="{{ link.url }}">{{ link.name}}</a> </li>
+    {% endfor %}
+  </ul>
+</section>

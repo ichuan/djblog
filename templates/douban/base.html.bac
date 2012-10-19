@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}{% endblock %}{{ settings.SITE_TITLE }}</title>
+  <meta name="author" content="{{ settings.SITE_AUTHOR }}" />
+  {% if page.description %}
+   <meta name="description" content="{{ page.description }}" />
+  {% endif %}
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="MobileOptimized" content="320" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  {% if keywords %}
+   <meta name="keywords" content="{{ keywords }}" />
+  {% endif %}
+  <link rel="canonical" href="{{ page.get_absolute_url }}" />
+  <link href="/feed/" rel="alternate" title="{{ settings.SITE_TITLE }}" type="application/atom+xml" />
+  <link href="/favicon.ico" rel="shortcut icon" />
+  <link href="{{ settings.MEDIA_URL }}css/screen.css?2" media="screen, projection" rel="stylesheet" type="text/css" />
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+  <script src="{{ settings.MEDIA_URL }}js/main.js"></script>
+  <link href='//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+  <link href='//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+  {% if settings.GA_ID %}
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', '{{ settings.GA_ID }}']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  {% endif %}
+</head>
+<body{% if no_sidebar %} class="no-sidebar"{% endif %}>
+  <header>
+	<hgroup>
+	  <h1><a href="/">{{ settings.SITE_TITLE }}</a></h1>
+	  {% if settings.SITE_SUBTITLE %}
+		<h2>{{ settings.SITE_SUBTITLE }}</h2>
+	  {% endif %}
+	</hgroup>
+  </header>
+  <nav role=navigation>
+	<ul role=subscription data-subscription="rss">
+	  <li><a href="/feed/" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+	</ul>
+	<form action="http://www.google.com/cse" method="get">
+	  <fieldset role="site-search">
+		<input type="hidden" name="cx" value="{{ settings.CSE_ID }}">
+		<input class="search" type="search" name="q" placeholder="Search" />
+	  </fieldset>
+	</form>
+	<ul role=main-navigation>
+	  <li><a href="/">Blog</a></li>
+	  <li><a href="/archives/">Archives</a></li>
+	  {% load helper %}
+	  {% getnavas navs %}
+		{% for i in navs %}
+		  <li><a href="{{ i.get_absolute_url }}">{{ i.title }}</a></li>
+		{% endfor %}
+	</ul>
+  </nav>
+  <div id="main">
+    <div id="content">
+      {% block content %}{% endblock %}
+      {% if not no_sidebar %}
+        <aside role=sidebar>{% block sidebar %}{% endblock %}</aside>
+      {% endif %}
+    </div>
+  </div>
+  <footer>
+	<p>
+	  Copyright &copy; 2011 - {{ settings.SITE_AUTHOR }} -
+	  <span class="credit">Powered by <a href="https://github.com/ichuan/djblog">djblog</a></span> -
+	  <span class="credit">Theme by <a href="http://www.octopress.org/">Octopress</a></span>
+	</p>
+  </footer>
+</body>
+</html>

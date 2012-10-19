@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load helper %}
+{% block title %}友情链接{% endblock %}
+
+{% block content %}
+
+<h1 class="title">友情链接<span class="about"> 已经与<span class="big">{{ links.count }}</span>个好友建立了链接</span></h1>
+		
+<div id="link">
+	{% for link in links %}
+	<div class="item" >
+		<a href="{{ link.url }}" target='_blank'>{{ link.name }}</a>
+	</div>	
+	{% endfor %}		
+</div><!-- end Link -->
+
+
+
+
+
+{% endblock %}
+
+{% block sidebar %}
+<ul>
+    <li><img class="zhuangshi" src="/static/douban/images/link.jpg" /></li>
+	<li>&gt;<a href="/index.php?s=/">返回首页</a></li>
+</ul>
+{% endblock %}

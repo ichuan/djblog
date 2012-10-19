@@ -1,6 +1,6 @@
 介绍
 ----
-一个基于 django 开发的 blog 程序，演示站点：[ichuan.net][1]。特性包括：
+一个基于 django 开发的 blog 程序,特性包括：
 
   1. HTML5
   2. 手持设备访问优化
@@ -13,6 +13,11 @@
   9. 主题
   10. RSS
   11. Google 自定义搜索
+
+新特性
+-----
+1. 新增豆瓣风格主题
+2. 重新规划了主题,静态资源目录结构
 
 依赖
 ----
@@ -36,4 +41,7 @@
 
 主题放在 `templates/` 目录下，一个目录是一个主题，`classic` 为默认主题，可参考这个制作新主题。
 
-[1]: http://ichuan.net
+DEMO
+----
++ 主题1 <http://ichuan.net>
++ 主题2 <http://djblog.pythoner.net>

@@ -1,0 +1,40 @@
+/* CSS Document */
+*{
+  margin:0;
+  padding::0;
+  font-size:12px;}
+
+hr{
+  height:1px;
+  color:#E9F4E9;
+  margin:0;
+  padding:0;}
+
+.bg{
+  background:#E9F4E9;}  
+
+a{
+  text-decoration:none;
+  color:#336699;}
+ 
+.logo{
+  height:20px;
+  width:auto;}
+ 
+.dark{
+  color:#cccccc;}
+
+.center{
+  text-align:center;}
+  
+.blue{
+  color:#060;}
+  
+.red{
+  color:#FF0000;}
+  
+.black{
+  font-weight:900;}
+
+input{}
+
