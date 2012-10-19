@@ -1,6 +1,6 @@
 介绍
 ----
-一个基于 django 开发的 blog 程序，演示站点：[ichuan.net][1]。特性包括：
+一个基于 django 开发的 blog 程序,特性包括：
 
   1. HTML5
   2. 手持设备访问优化
@@ -43,5 +43,5 @@
 
 DEMO
 ----
-+ <http://ichuan.net>
-+ <http://djblog.pythoner.net>
++ 主题1 <http://ichuan.net>
++ 主题2 <http://djblog.pythoner.net>
