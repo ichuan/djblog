@@ -48,15 +48,15 @@ function nowtime(){
   </div>
   <div class="right">
     <a href="#">欢迎您,{% if request.user %}{{ request.user }}{% else %}访客</a>{% endif %}
-    <a href="/index.php?s=/Rss/" target="_blank" title="使用RSS2.0订阅本站">订阅</a>
-    <a href="http://www.douban.com/people/T-y/" target="_blank" title="去围观TY的豆瓣">豆瓣</a>
-    <a href="http://weibo.com/tyminiblog2010" target="_blank" title="去围观TY的新浪微博">新浪</a>
+    <a href="/feed/" target="_blank" title="使用RSS2.0订阅本站">订阅</a>
+    {% if settings.DOUBAN %}<a href="http://www.douban.com/people/T-y/" target="_blank" title="去围观{{ settings.SITE_AUTHOR }}的豆瓣">豆瓣</a>{% endif %}
+    {% if settings.WEIBO %}<a href="http://weibo.com/tyminiblog2010" target="_blank" title="去围观{{ settings.SITE_AUTHOR }}的新浪微博">微博</a>{% endif %}
     {% if request.user %}<a href="/admin/logout/">登出</a>{% endif %}
   </div>
 </div><!-- end topnav-->
 <div id="header" class="blue">
   <div class="logo">
-    <a href="/index.php?s="><img src="/static/douban/images/logo.png" title="TY的微博 " />
+    <a href="/"><img src="/static/douban/images/logo.png" title="{{ settings.SITE_TITLE }}-{{ settings.SITE_DESC }}" />
     </a>
   </div>  
   <div id="menu">
@@ -92,7 +92,7 @@ function totop(){
 }
 </script>
 <div class="footer" id="wrapper">
-  <div class="footerl">&copy; 2010-2011 T-Y.ME POWERED BY <a href="http://t-y.me/">TY</a></div>
+  <div class="footerl">&copy; 2010-2011 T-Y.ME POWERED BY <a target="_blank" href="https://github.com/tianyu0915/djblog">DJBLOG</a></div>
     <div class="footerr">
   <a href="#" title="如果你在浏览小站的时候发现了BUG，请告诉我。">BUG报告</a>
   <a href="#">手机访问</a>

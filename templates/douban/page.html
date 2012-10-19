@@ -3,15 +3,14 @@
 {% block title %}{{ page.title }} - {% endblock %}
 {% block content %}
 <h1 class="title">{{ page.title }}<span class="about"></span> </h1>
-<div id="note">         
+<div id="note">
+{% if not single_page %}         
   <div class="date"><time datetime="{{ page.created_at|date:"Y-m-d H:i:s" }}" pubdate>{{ page.created_at }}</time>
-
 {% if tags %}<span class="categories"></span>{% for i in tags %}<a class="category" href="{{ i.get_absolute_url }}">{{ i.name }}</a> {% endfor %}{% endif %}
   </div>
-  <div class="content"><div id="blog-content">{{ page.content|safe }}</div></div><!-- end content -->      
+{% endif %}
+  <div class="content"><div id="blog-content">{{ page.content|safe }}</div></div><!-- end content -->   
 </div><!-- end note --> 
-
-
 
 {% if sharing %}
         <div class="sharing">
@@ -21,7 +20,6 @@
 			<a href="#" onclick="location.href='http://www.delicious.com/share?url='+encodeURIComponent(location.href)+'&title='+encodeURIComponent(document.title);return false;">Delicious</a>
 		</div>
 {% endif %}
-
 
 {% if comments %}
   <section>
