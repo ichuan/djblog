@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load helper %}
+{% block title %}友情链接{% endblock %}
+{% block content %}
+<h1>友情链接</h1>
+<div id="link">
+	{% for link in links %}
+	<div class="item" >
+		<a href="{{ link.url }}" target='_blank'>{{ link.name }}</a>
+	</div>	
+	{% endfor %}		
+</div><!-- end Link -->
+{% endblock %}
+
+{% block sidebar %}
+{% endblock %}
