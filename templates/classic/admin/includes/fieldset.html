@@ -15,6 +15,10 @@
 .wmd-prompt-dialog > form > input[type="button"]{border: 1px solid #888;font-weight:bold;}
 .wmd-input {width:660px;height:200px;}
 #wmd-input {font-family:Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;}
+.wmd-prompt-dialog.image {padding:10px;position:fixed;width:400px;height:120px;top:50%;left:50%;margin: -60px 0 0 -200px;z-index:1001;}
+.wmd-prompt-dialog.image input[type="button"] {border: 1px solid #888;font-weight:bold;margin:10px;width:7em;}
+.tabs {float:left;width:160px;line-height:24px;}
+.cont {float:left;width:140px;}
 </style>
 <script src="{{ MEDIA_URL }}js/wmd.min.js"></script>
 <fieldset class="module aligned {{ fieldset.classes }}">
@@ -41,13 +45,61 @@
 									<textarea id="wmd-input" class="wmd-input" name="markdown" class="vLargeTextField">{{ field.field.value|default_if_none:"" }}</textarea>
 								</div>
 								<div id="wmd-preview" class="wmd-panel wmd-preview"></div>
+                <script id="image-popup-tpl" type="text/tpl">
+                  <div class="wmd-prompt-dialog image">
+                    <h2>Add Image</h2>
+                    <div class="tabs">
+                      <label><input type="radio" name="tab" onclick="$('#image-form input').hide();$('#image-upload').show()" checked="checked" /> From my computer</label><br />
+                      <label><input type="radio" name="tab" onclick="$('#image-form input').hide();$('#image-input').show()" /> From the web</label>
+                    </div>
+                    <div class="cont">
+                      <form enctype="multipart/form-data" method="post" action="/upload-image/" target="target_iframe" id="image-form">
+                        {% csrf_token %}
+                        <input type="file" name="image" id="image-upload" />
+                        <input style="display:none" placeholder="http://" id="image-input" size="32" />
+                      </form>
+                      <iframe id="target_iframe" name="target_iframe" src="" style="width:0;height:0;border:0px solid #fff;"></iframe>
+                    </div>
+                    <div style="clear:both;">
+                    <p style="text-align:center">
+                      <input type="button" value="OK" class="btn-ok button" />
+                      <input type="button" value="Cancel" class="btn-cancel button" />
+                    </p>
+                  </div>
+                </script>
 								<script>
 								(function(){
-									var conv = new Markdown.Converter();
+									var conv = new Markdown.Converter(); window.$ = django.jQuery;
 									var editor = new Markdown.Editor(conv, '', {handler: function(){
 										window.open('http://stackoverflow.com/editing-help');
 										return false;
 									}});
+                  editor.hooks.set('insertImageDialog', function (callback) {
+                    var dlg = $($('#image-popup-tpl').html());
+                    $(document.body).append(dlg);
+
+                    window._image_callback_ = function (url) {
+                      dlg.remove();
+                      callback(url);
+                    };
+
+                    dlg.find('.btn-cancel').click(function () {
+                      _image_callback_(null);
+                    });
+
+                    dlg.find('.btn-ok').click(function () {
+                      var link, input = $('#image-input');
+                      if (input.is(':visible')) {
+                        link = input.val();
+                        _image_callback_(link || null);
+                      } else {
+                        $(this).attr('disabled', 'disabled').val('Waiting...');
+                        $('#image-form').submit();
+                      }
+                    });
+
+                    return true;
+                  });
 									editor.run();
 									// hold
 									window.onbeforeunload = function(e){
@@ -57,7 +109,7 @@
 										}
 										return '放弃此次编辑？';
 									}
-									django.jQuery('#post_form').submit(function(){ window.onbeforeunload = null; });
+									$('#post_form').submit(function(){ window.onbeforeunload = null; });
 								})();
 								</script>
 							{% else %}

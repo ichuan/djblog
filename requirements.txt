@@ -1,0 +1,2 @@
+git+https://github.com/waylan/Python-Markdown.git
+django==1.3.1

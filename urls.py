@@ -21,4 +21,5 @@ urlpatterns += patterns('blog.views',
 	(r'^post/(?P<pid>\d+)/', 'show_post'),
 	(r'^tag/(?P<name>.+)/$', 'list_by_tag'),
     (r'^feed/$', LatestPostFeed()),
+	(r'^upload-image/', 'upload_image'),
 )

@@ -131,6 +131,7 @@ LOGGING = {
 }
 
 DATETIME_FORMAT = 'Y/m/d H:i:s'
+FILE_UPLOAD_MAX_MEMORY_SIZE = 10485760 # 10MB
 
 # overwrite configs
 try:
