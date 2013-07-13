@@ -1,7 +1,6 @@
 # coding: utf-8
 # author: yc@/2011/8/26
 
-import markdown
 from django.db import models
 from django.db.models import F
 from django.contrib.auth.models import User
@@ -52,8 +51,7 @@ class Page(models.Model):
 	title = models.CharField(max_length=200, verbose_name=u'标题')
 	slug = models.CharField(max_length=50, unique=True, db_index=True, verbose_name=u'Slug', help_text=u'页面的 URL 名称。可包含字母、数字、减号、下划线，不能是以下词语之一：archives、post、tag')
 	author = models.ForeignKey(User, editable=False)
-	markdown = models.TextField(verbose_name=u'内容')
-	content = models.TextField(blank=True, editable=False)
+	content = models.TextField(verbose_name=u'内容')
 	created_at = models.DateTimeField(auto_now_add=True, verbose_name=u'发布日期')
 	allow_comment = models.BooleanField(default=False, verbose_name=u'允许评论')
 	seq = models.IntegerField(default=0, db_index=True, verbose_name=u'排序')
@@ -82,8 +80,7 @@ class Post(models.Model):
 	title = models.CharField(max_length=200, verbose_name=u'标题')
 	slug = models.CharField(max_length=50, blank=True, verbose_name=u'Slug', help_text=u'本文的短标签，将出现在文章 URL 中。可包含字母、数字、减号、下划线，如：does-python-optimize-function-calls-from-loops')
 	author = models.ForeignKey(User, editable=False)
-	markdown = models.TextField(verbose_name=u'内容')
-	content = models.TextField(blank=True, editable=False)
+	content = models.TextField(verbose_name=u'内容')
 	created_at = models.DateTimeField(auto_now_add=True, verbose_name=u'发布日期')
 	count_hit = models.IntegerField(default=0, editable=False, verbose_name=u'点击数')
 	tags = models.ManyToManyField(Tag, blank=True, verbose_name=u'标签')

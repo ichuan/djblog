@@ -2,7 +2,7 @@
 # coding: utf-8
 # yc@2011/08/27
 
-import markdown, re
+import re
 from django import forms
 from django.db.models import F
 from django.contrib import admin
@@ -32,7 +32,6 @@ class PageAdmin(admin.ModelAdmin):
 	def save_model(self, request, obj, form, change):
 		'''新建/编辑 页面'''
 		obj.author = request.user
-		obj.content = markdown.markdown(obj.markdown)
 
 		return super(PageAdmin, self).save_model(request, obj, form, change)
 
@@ -56,7 +55,6 @@ class PostAdmin(admin.ModelAdmin):
 		'''新建/编辑 文章'''
 		is_editing = bool(obj.id)
 		obj.author = request.user
-		obj.content = markdown.markdown(obj.markdown)
 		old_tags = None
 
 		# 保存原有标签

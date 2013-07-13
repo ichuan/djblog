@@ -49,20 +49,23 @@ def upload_image(request):
 		raise Http404
 	path = 'null'
 	msg = ''
-	if 'image' in request.FILES:
-		f = request.FILES['image']
+	if 'imgFile' in request.FILES:
+		f = request.FILES['imgFile']
 		if f.size > settings.FILE_UPLOAD_MAX_MEMORY_SIZE:
-			msg = 'alert("Image size too large!");'
+			msg = 'Image size too large!'
 		else:
 			ext = imghdr.what(f.file)
 			if not ext:
-				msg = 'alert("Not an image file!");'
+				msg = 'Not an image file!'
 			else:
 				path = 'static/upload/%d.%s' % (int(time.time() * 1000), ext)
 				os_path = os.path.join(settings.ROOT_DIR, path)
-				path = '"/%s"' % path
+				path = '/%s' % path
 				open(os_path, 'wb+').write(f.read())
 	else:
-		msg = 'alert("No image file selected!");'
-	return HttpResponse('<script>%s;top._image_callback_(%s)</script>'
-						% (msg, path))
+		msg = 'No image file selected!'
+	if msg: 
+		ret = '{"error" : 1, "message": "%s"}' % msg
+	else:
+		ret = '{"error" : 0, "url" : "%s"}' % path
+	return HttpResponse(ret)

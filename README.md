@@ -5,7 +5,7 @@
   1. HTML5
   2. 手持设备访问优化
   3. Disqus 评论系统集成
-  4. Markdown 语法写作
+  4. KindEditor
   5. 标签
   6. 单页面
   7. 友情链接
@@ -17,8 +17,7 @@
 依赖
 ----
 
-1. markdown: `https://github.com/waylan/Python-Markdown/`
-2. django >= 1.3
+1. django >= 1.3
 
 安装步骤
 --------
