@@ -48,8 +48,8 @@ GA_ID = 'UA-15372596-1'
 # google custom search id, see http://www.google.com/cse/
 CSE_ID = '017823656936221718810:8oexw_fkbz0'
 
-# disqus 评论 id
-DISQUS_SHORTNAME = 'ycsblog'
+# 多说 id
+DUOSHUO_NAME = ''
 
 
 #### 以下配置不要改动 ####

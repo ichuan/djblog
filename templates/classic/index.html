@@ -12,8 +12,8 @@
         <p class="meta">
       	<time datetime="{{ post.created_at|date:"Y-m-d H:i:s O" }}" pubdate>{{ post.created_at }}</time>
         </p>
-		{% if settings.DISQUS_SHORTNAME %}
-        <p class="comment-count"><a href="{{ post.get_absolute_url }}#disqus_thread" rel="full-article"></a></p>
+		{% if settings.DUOSHUO_NAME %}
+        <p class="comment-count"><a href="{{ post.get_absolute_url }}#ds-thread" class="ds-thread-count" data-thread-key="{{ post.id }}"></a></p>
 		{% endif %}
     </header>
     <div class="entry-content">{{ post.content|safe }}</div>
@@ -34,21 +34,32 @@
   </div>
 </nav>
 </div>
-{% if settings.DISQUS_SHORTNAME %}
+{% if settings.DUOSHUO_NAME %}
+<!-- Duoshuo Comment BEGIN -->
 <script type="text/javascript">
-    var disqus_shortname = '{{ settings.DISQUS_SHORTNAME }}';
-    (function () {
-        var s = document.createElement('script'); s.async = true;
-        s.type = 'text/javascript';
-        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
-        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-    }());
-</script>
+var duoshuoQuery = {short_name:"{{ settings.DUOSHUO_NAME }}"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- Duoshuo Comment END -->
 {% endif %}
 {% endblock %}
 
 {% block sidebar %}
   {% get_recent_posts 5 %}
+
+<section>
+  <h1>Recent Comments</h1>
+  <ul id="recent_comments" class="ds-recent-comments" data-num-items="5">
+  </ul>
+</section>
+
   {% get_top_tags 20 %}
   {% get_links 20 %}
 {% endblock %}
